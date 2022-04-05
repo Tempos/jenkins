@@ -1,13 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.10.1-alpine'
-        }
-    }
+    agent { docker { image 'python:3.10.1-alpine' } }
     stages {
         stage('Build') {
             steps { timeout(time: 3, unit: 'MINUTES') { retry(5) {
-                sh 'python -V; echo "Hello World"; echo "Multiline shell steps works too"; ls -lah'
+                sh 'python -V'
+                sh 'echo "Hello World"'
+                sh 'echo "Multiline shell steps works too"'
+                sh 'ls -lah'
             }}}
         }
     }
