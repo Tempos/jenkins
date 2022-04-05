@@ -1,11 +1,8 @@
 pipeline {
     agent any
-//     agent { docker {
-//         image 'python:3.10.1-alpine'
-//         label 'python'
-//     } }
     stages {
         stage('Build') {
+            agent { docker { image 'python:3.10.1-alpine' } }
             steps { timeout(time: 3, unit: 'MINUTES') { retry(5) {
                 sh 'python -V'
                 sh 'echo "Hello World"'
