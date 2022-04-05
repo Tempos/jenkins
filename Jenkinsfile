@@ -1,5 +1,9 @@
 pipeline {
-    agent docker { image 'python:3.10.1-alpine' }
+    agent {
+        docker {
+            image 'python:3.10.1-alpine'
+        }
+    }
     stages {
         stage('Build') {
             steps { timeout(time: 3, unit: 'MINUTES') { retry(5) {
