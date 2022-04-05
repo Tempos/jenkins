@@ -1,14 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            agent { docker { image 'python:3.10.1-alpine' } }
+//         stage('Build') {
+//             agent { docker { image 'python:3.10.1-alpine' } }
             steps { timeout(time: 3, unit: 'MINUTES') { retry(5) {
-                sh 'python -V'
+//                 sh 'python -V'
                 sh 'echo "Hello World"'
                 sh 'echo "Multiline shell steps works too"'
                 sh 'ls -lah'
             }}}
+        }
+        stage('Sanity check') {
+            steps {input "Does the staging environment look ok?"}
         }
     }
     post {
